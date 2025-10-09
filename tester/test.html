@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tahap0l - Modern web ve mobil arayüzler. Full-stack geliştirme, mobil odaklı tasarım ve marka UI sistemleri.">
+  <title>Tahap0l - Modern Web & Mobil Arayüzler</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ============================================
+       TAHAP0L STYLES
+       Modern, dark, glassy design system
+       ============================================ */
+
+    /* ============================================
+       CSS RESET & BASE
+       ============================================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Colors */
+      --color-bg-dark: #0a0a0f;
+      --color-bg-card: rgba(17, 17, 27, 0.7);
+      --color-bg-card-hover: rgba(17, 17, 27, 0.85);
+      --color-text-primary: #f8f9fa;
+      --color-text-secondary: #a8b2d1;
+      --color-text-muted: #6b7280;
+      --color-accent-indigo: #6366f1;
+      --color-accent-cyan: #06b6d4;
+      --color-border: rgba(255, 255, 255, 0.1);
+      --color-border-hover: rgba(255, 255, 255, 0.2);
+      
+      /* Spacing */
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2rem;
+      --space-xl: 3rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+      
+      /* Border radius */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+      --radius-full: 9999px;
+      
+      /* Shadows */
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2);
+      --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.3);
+      
+      /* Focus ring */
+      --focus-ring: 0 0 0 4px rgba(99, 102, 241, 0.25);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--color-bg-dark);
+      color: var(--color-text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ============================================
+       BACKGROUND EFFECTS
+       ============================================ */
+    .bg-accent {
+      position: fixed;
+      top: -50%;
+      left: -25%;
+      width: 150%;
+      height: 150%;
+      background: radial-gradient(
+        circle at 30% 20%,
+        rgba(99, 102, 241, 0.15) 0%,
+        rgba(6, 182, 212, 0.05) 25%,
+        transparent 50%
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ============================================
+       LAYOUT UTILITIES
+       ============================================ */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+    }
+
+    .section {
+      padding: var(--space-3xl) 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section--hero {
+      padding: 8rem 0 var(--space-3xl);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .section--compact {
+      padding: var(--space-2xl) 0;
+    }
+
+    /* ============================================
+       GRID SYSTEM
+       ============================================ */
+    .grid {
+      display: grid;
+      gap: var(--space-lg);
+    }
+
+    .grid-2 {
+      grid-template-columns: 1fr;
+    }
+
+    .grid-3 {
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 768px) {
+      .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* ============================================
+       HEADER
+       ============================================ */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 15, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--space-md) 0;
+    }
+
+    .header__container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header__brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      text-decoration: none;
+      color: var(--color-text-primary);
+      font-weight: 700;
+      font-size: 1.25rem;
+      transition: opacity 0.2s;
+    }
+
+    .header__brand:hover {
+      opacity: 0.8;
+    }
+
+    .header__icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .header__nav {
+      display: none;
+      gap: var(--space-lg);
+    }
+
+    @media (min-width: 768px) {
+      .header__nav {
+        display: flex;
+      }
+    }
+
+    .header__link {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .header__link:hover {
+      color: var(--color-text-primary);
+    }
+
+    .header__link:focus {
+      outline: none;
+      color: var(--color-text-primary);
+    }
+
+    .header__cta {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .header__cta {
+        display: block;
+      }
+    }
+
+    .header__mobile-toggle {
+      display: block;
+      background: none;
+      border: none;
+      color: var(--color-text-primary);
+      cursor: pointer;
+      padding: var(--space-xs);
+    }
+
+    @media (min-width: 768px) {
+      .header__mobile-toggle {
+        display: none;
+      }
+    }
+
+    .header__mobile-menu {
+      display: none;
+      position: fixed;
+      top: 73px;
+      left: 0;
+      right: 0;
+      background: rgba(10, 10, 15, 0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--space-lg) var(--space-md);
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .header__mobile-menu.active {
+      display: flex;
+    }
+
+    /* ============================================
+       TYPOGRAPHY
+       ============================================ */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-xs) var(--space-md);
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: var(--radius-full);
+      color: var(--color-accent-indigo);
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: var(--space-lg);
+    }
+
+    h1, h2, h3, h4 {
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-md);
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: var(--space-lg);
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: var(--space-sm);
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 3.5rem;
+      }
+      
+      h2 {
+        font-size: 2.5rem;
+      }
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--color-accent-indigo), var(--color-accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .text-secondary {
+      color: var(--color-text-secondary);
+    }
+
+    .text-muted {
+      color: var(--color-text-muted);
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .lead {
+      font-size: 1.125rem;
+      line-height: 1.7;
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-lg);
+    }
+
+    /* ============================================
+       BUTTONS
+       ============================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: 0.875rem 1.75rem;
+      border-radius: var(--radius-lg);
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+    }
+
+    .btn:focus {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--color-accent-indigo), var(--color-accent-cyan));
+      color: white;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--color-border-hover);
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
+    }
+
+    /* ============================================
+       CARDS
+       ============================================ */
+    .card {
+      background: var(--color-bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      background: var(--color-bg-card-hover);
+      border-color: var(--color-border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .card__icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: var(--space-md);
+    }
+
+    .card__badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: var(--radius-full);
+      color: var(--color-accent-indigo);
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: var(--space-md);
+    }
+
+    .card__title {
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-sm);
+    }
+
+    .card__text {
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ============================================
+       FORMS
+       ============================================ */
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .form__group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .form__label {
+      color: var(--color-text-primary);
+      font-size: 0.9375rem;
+      font-weight: 500;
+    }
+
+    .input,
+    .textarea {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      color: var(--color-text-primary);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+
+    .input:focus,
+    .textarea:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--color-accent-indigo);
+      box-shadow: var(--focus-ring);
+    }
+
+    .input::placeholder,
+    .textarea::placeholder {
+      color: var(--color-text-muted);
+    }
+
+    .textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    /* ============================================
+       CHECKLIST
+       ============================================ */
+    .checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .checklist__item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .checklist__icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      color: var(--color-accent-cyan);
+    }
+
+    /* ============================================
+       HERO SECTION
+       ============================================ */
+    .hero {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* ============================================
+       NEWSLETTER
+       ============================================ */
+    .newsletter {
+      background: var(--color-bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl);
+      text-align: center;
+    }
+
+    .newsletter__form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      max-width: 500px;
+      margin: var(--space-lg) auto 0;
+    }
+
+    @media (min-width: 640px) {
+      .newsletter__form {
+        flex-direction: row;
+      }
+    }
+
+    .newsletter__form .input {
+      flex: 1;
+    }
+
+    /* ============================================
+       CONTACT INFO
+       ============================================ */
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .contact-info__item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+    }
+
+    .contact-info__icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      color: var(--color-accent-indigo);
+    }
+
+    .contact-info__content h4 {
+      color: var(--color-text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .contact-info__link {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-info__link:hover {
+      color: var(--color-accent-cyan);
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .footer {
+      border-top: 1px solid var(--color-border);
+      padding: var(--space-xl) 0;
+      margin-top: var(--space-3xl);
+    }
+
+    .footer__container {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      align-items: center;
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .footer__container {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+    }
+
+    .footer__text {
+      color: var(--color-text-muted);
+      font-size: 0.875rem;
+    }
+
+    .footer__links {
+      display: flex;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer__link {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+
+    .footer__link:hover {
+      color: var(--color-text-primary);
+    }
+
+    /* ============================================
+       UTILITIES
+       ============================================ */
+    .mb-sm { margin-bottom: var(--space-sm); }
+    .mb-md { margin-bottom: var(--space-md); }
+    .mb-lg { margin-bottom: var(--space-lg); }
+    .mb-xl { margin-bottom: var(--space-xl); }
+
+    .mt-sm { margin-top: var(--space-sm); }
+    .mt-md { margin-top: var(--space-md); }
+    .mt-lg { margin-top: var(--space-lg); }
+    .mt-xl { margin-top: var(--space-xl); }
+
+    .max-w-prose {
+      max-width: 65ch;
+    }
+
+    /* ============================================
+       ANIMATIONS
+       ============================================ */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Accent Layer -->
+  <div class="bg-accent" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header__container">
+      <a href="#" class="header__brand">
+        <svg class="header__icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="32" height="32" rx="8" fill="url(#gradient1)"/>
+          <path d="M10 12h12M10 16h12M10 20h8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="gradient1" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6366f1"/>
+              <stop offset="1" stop-color="#06b6d4"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span>Tahap0l</span>
+      </a>
+
+      <nav class="header__nav">
+        <a href="#hizmetler" class="header__link">Hizmetler</a>
+        <a href="#projeler" class="header__link">Projeler</a>
+        <a href="#hakkimizda" class="header__link">Hakkımızda</a>
+        <a href="#iletisim" class="header__link">İletişim</a>
+      </nav>
+
+      <a href="#projeler" class="btn btn-primary header__cta">Portfolyo</a>
+
+      <button class="header__mobile-toggle" id="mobileToggle" aria-label="Menüyü aç">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="header__mobile-menu" id="mobileMenu">
+      <a href="#hizmetler" class="header__link">Hizmetler</a>
+      <a href="#projeler" class="header__link">Projeler</a>
+      <a href="#hakkimizda" class="header__link">Hakkımızda</a>
+      <a href="#iletisim" class="header__link">İletişim</a>
+      <a href="#projeler" class="btn btn-primary">Portfolyo</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="section section--hero">
+    <div class="container">
+      <div class="hero fade-in">
+        <div class="eyebrow">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M8 2L10 6L14 7L11 10L12 14L8 12L4 14L5 10L2 7L6 6L8 2Z" fill="currentColor"/>
+          </svg>
+          Modern web + mobil arayüzler
+        </div>
+
+        <h1>
+          Markanızı <span class="gradient-text">dijital dünyada</span> öne çıkarın
+        </h1>
+
+        <p class="lead">
+          Hızlı, kullanıcı dostu ve mobil odaklı web çözümleri ile işinizi büyütün. Full-stack geliştirme ve marka odaklı tasarımda uzman ekip.
+        </p>
+
+        <div class="btn-group">
+          <a href="#hizmetler" class="btn btn-primary">Hizmetleri Keşfet</a>
+          <a href="#iletisim" class="btn btn-outline">Ücretsiz Ön Görüşme</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="hizmetler" class="section">
+    <div class="container">
+      <div class="text-center mb-xl">
+        <h2>Sunduğumuz <span class="gradient-text">Hizmetler</span></h2>
+        <p class="lead">Her projeye özel, modern ve ölçeklenebilir çözümler</p>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="card">
+          <svg class="card__icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="6" y="6" width="36" height="36" rx="4" stroke="url(#gradient2)" stroke-width="2"/>
+            <path d="M16 16h16M16 24h16M16 32h10" stroke="url(#gradient2)" stroke-width="2" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="gradient2" x1="6" y1="6" x2="42" y2="42" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#6366f1"/>
+                <stop offset="1" stop-color="#06b6d4"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <h3 class="card__title">Full-Stack Geliştirme</h3>
+          <p class="card__text">
+            React, Node.js ve modern teknolojilerle tam kapsamlı web uygulamaları. API entegrasyonları, veritabanı yönetimi ve bulut altyapı kurulumu dahil.
+          </p>
+        </article>
+
+        <article class="card">
+          <svg class="card__icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="14" y="6" width="20" height="36" rx="3" stroke="url(#gradient3)" stroke-width="2"/>
+            <circle cx="24" cy="37" r="2" fill="url(#gradient3)"/>
+            <path d="M18 12h12" stroke="url(#gradient3)" stroke-width="2" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="gradient3" x1="14" y1="6" x2="34" y2="42" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#6366f1"/>
+                <stop offset="1" stop-color="#06b6d4"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <h3 class="card__title">Mobil Odaklı Tasarım</h3>
+          <p class="card__text">
+            Responsive ve mobil-first yaklaşımla her ekran boyutunda mükemmel görünen arayüzler. Kullanıcı deneyimi odaklı, hızlı ve erişilebilir tasarımlar.
+          </p>
+        </article>
+
+        <article class="card">
+          <svg class="card__icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="24" cy="24" r="18" stroke="url(#gradient4)" stroke-width="2"/>
+            <path d="M24 12v24M12 24h24" stroke="url(#gradient4)" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="24" cy="24" r="4" fill="url(#gradient4)"/>
+            <defs>
+              <linearGradient id="gradient4" x1="6" y1="6" x2="42" y2="42" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#6366f1"/>
+                <stop offset="1" stop-color="#06b6d4"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <h3 class="card__title">Marka & UI Sistemi</h3>
+          <p class="card__text">
+            Tutarlı ve profesyonel görsel kimlik. Design system oluşturma, renk paleti, tipografi seçimi ve tekrar kullanılabilir komponent kütüphaneleri.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projeler" class="section">
+    <div class="container">
+      <div class="text-center mb-xl">
+        <h2>Öne Çıkan <span class="gradient-text">Projeler</span></h2>
+        <p class="lead">Başarıyla tamamladığımız çalışmalardan örnekler</p>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="card">
+          <span class="card__badge">Web App</span>
+          <h3 class="card__title">TaskFlow Minimal</h3>
+          <p class="card__text mb-lg">
+            Modern bir görev yönetim platformu. Sürükle-bırak arayüzü, gerçek zamanlı senkronizasyon ve ekip işbirliği özellikleriyle donatıldı.
+          </p>
+          <a href="#iletisim" class="btn btn-outline">İncele</a>
+        </article>
+
+        <article class="card">
+          <span class="card__badge">Landing</span>
+          <h3 class="card__title">Fitness Coach</h3>
+          <p class="card__text mb-lg">
+            Kişisel antrenör için modern landing page. Video entegrasyonu, randevu sistemi ve blog modülü ile kullanıcı dönüşümünü artıran tasarım.
+          </p>
+          <a href="#iletisim" class="btn btn-outline">İncele</a>
+        </article>
+
+        <article class="card">
+          <span class="card__badge">Dashboard</span>
+          <h3 class="card__title">EduMetrics</h3>
+          <p class="card__text mb-lg">
+            Eğitim kurumları için veri analiz platformu. İnteraktif grafikler, raporlama araçları ve öğrenci takip sistemleriyle kapsamlı çözüm.
+          </p>
+          <a href="#iletisim" class="btn btn-outline">İncele</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="hakkimizda" class="section">
+    <div class="container">
+      <div class="grid grid-2">
+        <div>
+          <h2 class="mb-lg">Neden <span class="gradient-text">Tahap0l</span>?</h2>
+          
+          <ul class="checklist">
+            <li class="checklist__item">
+              <svg class="checklist__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                <path d="M8 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span><strong>MVP 1-2 hafta:</strong> Hızlı prototipleme ile fikrinizi kısa sürede hayata geçirin</span>
+            </li>
+            <li class="checklist__item">
+              <svg class="checklist__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                <path d="M8 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span><strong>Tekrar kullanılabilir kod:</strong> Temiz, modüler ve bakımı kolay kod yapısı</span>
+            </li>
+            <li class="checklist__item">
+              <svg class="checklist__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                <path d="M8 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span><strong>Lighthouse 90+:</strong> SEO, performans ve erişilebilirlik standartlarında üstün kalite</span>
+            </li>
+            <li class="checklist__item">
+              <svg class="checklist__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                <path d="M8 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span><strong>Dokümantasyon:</strong> Kapsamlı teknik dokümantasyon ve kullanım kılavuzu</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="card">
+            <h3 class="card__title mb-md">Hikayemiz</h3>
+            <p class="card__text mb-lg">
+              Tahap0l olarak, markaların dijital dünyada fark yaratmasına yardımcı oluyoruz. Her proje için özel çözümler geliştiriyor, modern teknolojileri kullanarak hem görsel hem de teknik açıdan mükemmel sonuçlar üretiyoruz. Kullanıcı deneyimini ön planda tutarak, işinizi büyütecek dijital çözümler sunuyoruz.
+            </p>
+            <div class="btn-group">
+              <a href="#projeler" class="btn btn-primary">Örnekler</a>
+              <a href="#iletisim" class="btn btn-outline">İletişim</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="section section--compact">
+    <div class="container">
+      <div class="newsletter">
+        <h2 class="mb-md">Haberdar Olun</h2>
+        <p class="lead">Yeni projeler, ipuçları ve özel tekliflerden ilk siz haberdar olun.</p>
+        
+        <form class="newsletter__form" id="newsletterForm" aria-label="Bülten kayıt formu">
+          <label for="newsletter-email" class="form__label" style="position: absolute; left: -9999px;">E-posta adresiniz</label>
+          <input 
+            type="email" 
+            id="newsletter-email"
+            class="input" 
+            placeholder="E-posta adresiniz" 
+            required
+            aria-required="true"
+          >
+          <button type="submit" class="btn btn-primary">Kaydol</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="iletisim" class="section">
+    <div class="container">
+      <div class="text-center mb-xl">
+        <h2>İletişime <span class="gradient-text">Geçin</span></h2>
+        <p class="lead">Projeniz hakkında konuşalım. Size en kısa sürede dönüş yapacağız.</p>
+      </div>
+
+      <div class="grid grid-2">
+        <div>
+          <form class="form" id="contactForm" aria-label="İletişim formu">
+            <div class="form__group">
+              <label for="contact-name" class="form__label">Ad Soyad</label>
+              <input 
+                type="text" 
+                id="contact-name"
+                name="name"
+                class="input" 
+                placeholder="Adınız ve soyadınız" 
+                required
+                aria-required="true"
+              >
+            </div>
+
+            <div class="form__group">
+              <label for="contact-email" class="form__label">E-posta</label>
+              <input 
+                type="email" 
+                id="contact-email"
+                name="email"
+                class="input" 
+                placeholder="ornek@email.com" 
+                required
+                aria-required="true"
+              >
+            </div>
+
+            <div class="form__group">
+              <label for="contact-message" class="form__label">İhtiyaç / Özet</label>
+              <textarea 
+                id="contact-message"
+                name="message"
+                class="textarea" 
+                placeholder="Projeniz hakkında kısaca bilgi verin..."
+                required
+                aria-required="true"
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Gönder</button>
+          </form>
+        </div>
+
+        <div>
+          <div class="card">
+            <h3 class="card__title mb-lg">Alternatif İletişim</h3>
+            
+            <div class="contact-info">
+              <div class="contact-info__item">
+                <svg class="contact-info__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                  <path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div class="contact-info__content">
+                  <h4>E-posta</h4>
+                  <a href="mailto:esatpoal45@gmail.com" class="contact-info__link">esatpoal45@gmail.com</a>
+                </div>
+              </div>
+
+              <div class="contact-info__item">
+                <svg class="contact-info__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/>
+                  <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                  <circle cx="18" cy="6" r="1" fill="currentColor"/>
+                </svg>
+                <div class="contact-info__content">
+                  <h4>Instagram</h4>
+                  <a href="https://instagram.com/tahap0l" target="_blank" rel="noopener noreferrer" class="contact-info__link">@tahap0l</a>
+                </div>
+              </div>
+
+              <div class="contact-info__item">
+                <svg class="contact-info__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <div class="contact-info__content">
+                  <h4>Lokasyon</h4>
+                  <p class="contact-info__link">Ankara / Türkiye</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__container">
+      <p class="footer__text">&copy; <span id="currentYear">2024</span> Tahap0l. Tüm hakları saklıdır.</p>
+      
+      <nav class="footer__links" aria-label="Alt navigasyon">
+        <a href="#" class="footer__link">Üste Dön</a>
+        <a href="#hizmetler" class="footer__link">Hizmetler</a>
+        <a href="#projeler" class="footer__link">Projeler</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Mobile Menu Toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    if (mobileToggle && mobileMenu) {
+      mobileToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+        const isExpanded = mobileMenu.classList.contains('active');
+        mobileToggle.setAttribute('aria-expanded', isExpanded);
+      });
+
+      // Close mobile menu when clicking on a link
+      const mobileLinks = mobileMenu.querySelectorAll('a');
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('active');
+          mobileToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    // Newsletter Form
+    const newsletterForm = document.getElementById('newsletterForm');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const emailInput = document.getElementById('newsletter-email');
+        if (emailInput && emailInput.value) {
+          alert(`Teşekkürler! ${emailInput.value} adresi bültenimize kaydedildi. (Demo)`);
+          newsletterForm.reset();
+        }
+      });
+    }
+
+    // Contact Form
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('contact-name').value;
+        const email = document.getElementById('contact-email').value;
+        const message = document.getElementById('contact-message').value;
+        
+        if (name && email && message) {
+          alert(`Teşekkürler ${name}! Mesajınız alındı. En kısa sürede ${email} adresine dönüş yapacağız. (Demo)`);
+          contactForm.reset();
+        }
+      });
+    }
+
+    // Set current year in footer
+    const yearElement = document.getElementById('currentYear');
+    if (yearElement) {
+      yearElement.textContent = new Date().getFullYear();
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href && href !== '#' && href.length > 1) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+            // Close mobile menu if open
+            if (mobileMenu && mobileMenu.classList.contains('active')) {
+              mobileMenu.classList.remove('active');
+              if (mobileToggle) {
+                mobileToggle.setAttribute('aria-expanded', 'false');
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
