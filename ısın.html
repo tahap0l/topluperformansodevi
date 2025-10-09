@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Özür – Derse Gecikme | Taha</title>
+  <meta name="description" content="Derse gecikme için kısa özür sayfası. Sağ altta 12. sınıf edebiyat konu özetleri otomatik kayar." />
+  <style>
+    :root{
+      --bg:#0e0f16; --card:rgba(255,255,255,.06); --border:rgba(255,255,255,.12);
+      --text:#e9ecf6; --muted:#b6bdd3; --accent:#7c5cff; --accent2:#00d4ff; --ok:#2ecc71; --radius:18px
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0; font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial; color:var(--text);
+      background:
+        radial-gradient(900px 600px at 10% 10%, #1a1f3a 0%, #0e0f16 55%),
+        radial-gradient(900px 600px at 90% 90%, #0a1422 0%, #0e0f16 55%),
+        linear-gradient(180deg,#0e0f16,#0a0b12 60%);
+      overflow-x:hidden
+    }
+
+    /* Basit parıltı animasyonu */
+    @keyframes glow {0%,100%{box-shadow:0 0 0 rgba(124,92,255,0)}50%{box-shadow:0 0 30px rgba(124,92,255,.25)}}
+    @keyframes floaty {0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+    @keyframes fadeUp {from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:translateY(0)}}
+
+    .wrap{max-width:820px;margin:46px auto;padding:20px}
+    .card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+      backdrop-filter:saturate(140%) blur(10px); animation:glow 3.5s ease-in-out infinite}
+    header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 20px;border-bottom:1px solid var(--border);
+      background:linear-gradient(90deg,rgba(124,92,255,.16),rgba(0,212,255,.10))}
+    h1{margin:0;font-size:clamp(20px,2.6vw,30px);letter-spacing:.2px}
+    .badge{font-size:12px;padding:6px 10px;border:1px solid var(--border);border-radius:999px;color:var(--muted)}
+    main{padding:22px 22px 28px; display:grid; gap:14px}
+    p{margin:0; color:var(--muted); line-height:1.7}
+    .hero{border:1px dashed rgba(255,255,255,.09); border-radius:14px; padding:16px; background:rgba(255,255,255,.03); animation:fadeUp .7s ease both}
+    .hero strong{color:#fff}
+    .sig{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:14px;border-top:1px solid var(--border);padding:14px 20px}
+    .name{font-weight:700;color:#fff}
+
+    /* Sağ altta otomatik kayan özet kutusu */
+    .ticker{
+      position:fixed; right:18px; bottom:18px; width:min(360px, 90vw); height:140px;
+      border-radius:16px; border:1px solid var(--border); background:rgba(255,255,255,.06);
+      overflow:hidden; backdrop-filter:blur(8px) saturate(140%);
+      box-shadow:0 12px 32px rgba(0,0,0,.35); animation:floaty 5s ease-in-out infinite
+    }
+    .ticker-h{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--border);font-size:13px;color:var(--muted)}
+    .ticker-h .dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+    .track{position:relative;height:calc(100% - 38px);}
+    .marquee{position:absolute; inset:0; display:flex; flex-direction:column; gap:8px; padding:10px 12px; font-size:13px; line-height:1.4;}
+    .marquee:hover{animation-play-state:paused}
+    @keyframes scrollUp {from{transform:translateY(0)} to{transform:translateY(-50%)} }
+    .marquee{animation:scrollUp 18s linear infinite}
+    .pill{display:inline-block;padding:3px 8px;border-radius:999px;border:1px solid var(--border);margin-right:6px;color:var(--muted)}
+    .k{color:#dfe3ff}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <header>
+        <h1>Derste Gecikme İçin Özür</h1>
+        <span class="badge" id="lessonOut">Edebiyat</span>
+      </header>
+      <main>
+        <div class="hero">
+          <p>Sayın <strong id="teacherNameOut">Işın Hocam</strong>,</p>
+          <p>
+            <strong id="dateOut">3 Ekim Cuma</strong> günü derse gecikmem nedeniyle 
+            <strong>özür dilerim</strong>. Sorumluluk bana aittir; tekrar yaşanmaması için 
+            günlük düzenimi ve çıkış saatimi gözden geçirdim. Zamanında derste olacağım.
+          </p>
+        </div>
+        <p>Teşekkür ederim, anlayışınız için minnettarım.</p>
+      </main>
+      <div class="sig">
+        <div><span class="name" id="studentOut">Taha</span> · <span id="classOut">12. Sınıf</span></div>
+        <div id="todayOut"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sağ altta otomatik kayan 12. sınıf (Edebiyat) konu özetleri -->
+  <aside class="ticker" aria-label="12. sınıf edebiyat konu özetleri">
+    <div class="ticker-h"><span>12. Sınıf – Edebiyat Özetleri</span><span class="dot" aria-hidden="true"></span></div>
+    <div class="track">
+      <div class="marquee" id="mq">
+        <div><span class="pill">Tanzimat</span> <span class="k">I. ve II. dönem sanatçıları; toplumsal konular, dilde sadeleşme başlangıcı.</span></div>
+        <div><span class="pill">Servet‑i Fünun</span> <span class="k">Ağır dil, bireysel temalar, parnasizm‑sembolizm etkisi; Tevfik Fikret, Halit Ziya.</span></div>
+        <div><span class="pill">Fecr‑i Âti</span> <span class="k">"Sanat şahsî ve muhteremdir" anlayışı; kısa ömürlü akım.</span></div>
+        <div><span class="pill">Milli Edebiyat</span> <span class="k">Dil anlayışı: sade Türkçe; memleket gerçekleri; Ömer Seyfettin, Ziya Gökalp.</span></div>
+        <div><span class="pill">Cumhuriyet Şiiri</span> <span class="k">Saf şiir, Garip, İkinci Yeni; tema ve dilde yenilikler.</span></div>
+        <div><span class="pill">Cumhuriyet Romanı</span> <span class="k">Toplumcu gerçekçilikten postmodern kurguya geniş yelpaze.</span></div>
+        <div><span class="pill">Halk Edebiyatı</span> <span class="k">Âşık, tekke, anonim türler; nazım birimi ve ölçü özellikleri.</span></div>
+        <div><span class="pill">Divan</span> <span class="k">Mazmunlar, beyit hâkimiyeti, aruz; gazel, kaside, mesnevi türleri.</span></div>
+        <div><span class="pill">Öğretici Metinler</span> <span class="k">Söylev, deneme, makale, fıkra; amaç: bilgilendirme/ikna.</span></div>
+        <div><span class="pill">Tiyatro</span> <span class="k">Tanzimat'tan Cumhuriyet'e biçim ve tema dönüşümü.</span></div>
+        <div><span class="pill">Dünya Akımları</span> <span class="k">Klasisizm'den modernizme; realizm, naturalizm, romantizm etkileri.</span></div>
+        <!-- Yinelenen bloklar (kesintisiz kayma için) -->
+        <div><span class="pill">Tanzimat</span> <span class="k">I. ve II. dönem; toplumsal konular, sadeleşme adımı.</span></div>
+        <div><span class="pill">Servet‑i Fünun</span> <span class="k">Ağır dil, bireysel temalar; estetik kaygı.</span></div>
+        <div><span class="pill">Milli Edebiyat</span> <span class="k">Sade Türkçe, millî duyarlık.</span></div>
+        <div><span class="pill">Cumhuriyet Şiiri</span> <span class="k">Garip, İkinci Yeni, toplumcu şiir.</span></div>
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    // Statik değerler – kullanıcı isteğine göre dolduruldu
+    const state = {
+      teacherName: 'Işın Hocam',
+      lesson: 'Edebiyat',
+      student: 'Taha',
+      klass: '12. Sınıf',
+      dateText: '3 Ekim Cuma'
+    };
+
+    const qs = s=>document.querySelector(s);
+    const fill = ()=>{
+      qs('#teacherNameOut').textContent = state.teacherName;
+      qs('#lessonOut').textContent = state.lesson;
+      qs('#studentOut').textContent = state.student;
+      qs('#classOut').textContent = state.klass;
+      qs('#dateOut').textContent = state.dateText;
+      const now = new Date();
+      qs('#todayOut').textContent = now.toLocaleDateString('tr-TR',{day:'2-digit',month:'long',year:'numeric'});
+    }
+    fill();
+
+    // Marquee akışı uzunluk ayarı: içerik yüksekliğinin yarısı kadar kaydır
+    const mq = qs('#mq');
+    // İçeriğin iki kez kopyalanması üstte yapıldı; süre/dongu yeterli.
+
+    // Dokununca durdur/başlat (mobil için)
+    let paused=false;
+    mq.addEventListener('click',()=>{
+      paused=!paused; mq.style.animationPlayState = paused ? 'paused' : 'running';
+    });
+  </script>
+</body>
+</html>
